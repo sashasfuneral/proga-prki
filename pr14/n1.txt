@@ -1,0 +1,281 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq.Expressions;
+
+namespace pr14
+{
+    public class Photography
+    {
+        public int onum;
+        public DateTime odate;
+        public string phsize;
+        public string phname;
+        public string cname;
+        public double oprice;
+
+        public override string ToString()
+        {
+            return $"Номер заказа: {onum}, Дата заказа: {odate}, Размер фотографии: {phsize}, ФИО Фотографа: {phname}, ФИО Заказчика: {cname}, Цена заказа:{oprice}";
+        }
+    }
+    public class Node
+    {
+        public Photography info;
+        public Node link;
+
+        public Node(Photography info)
+        {
+            this.info = info;
+            link = null;
+        }
+    }
+    public class SingleLinkedList
+    {
+        private Node first;
+        public SingleLinkedList()
+        {
+            first = null;
+        }
+        public void add(Photography ph)
+        {
+            Node p = new Node(ph);
+            if(first == null)
+            {
+                first = p;
+            }
+            else
+            {
+                Node q = first;
+                while(q.link != null)
+                {
+                    q = q.link;
+                }
+                q.link = p;
+            }
+        }
+        public void addbefore(int onum, Photography ph)
+        {
+            Node p = first;
+            Node q = null;
+            while(p != null && p.info.onum != onum)
+            {
+                q = p;
+                p = p.link;
+            }
+            if(p == null)
+            {
+                Console.WriteLine($"Заказа с номером {onum} не существует");
+                return;
+            }
+            Node r = new Node(ph);
+            if(q == null)
+            {
+                r.link = first;
+                first = r;
+            }
+            else
+            {
+                r.link = p;
+                q.link = r;
+            }
+        }
+        public void addafter(int onum, Photography ph)
+        {
+            Node p = first;
+            while(p != null && p.info.onum != onum)
+            {
+                p = p.link;
+            }
+            if(p == null)
+            {
+                Console.WriteLine($"Заказа с номером {onum} не существует");
+                return;
+            }
+            Node r = new Node(ph);
+            r.link = p.link;
+            p.link = r;
+        }
+        public void view()
+        {
+            Node p = first;
+            while(p != null)
+            {
+                Console.WriteLine(p.info.ToString());
+                p = p.link;
+            }
+        }
+        public Node search(int onum)
+        {
+            Node p = first;
+            while(p != null)
+            {
+                if(p.info.onum == onum)
+                {
+                    return p;
+                }
+                p = p.link;
+            }
+            return null;
+        }
+        public void delete(int onum)
+        {
+            Node p = first;
+            Node q = null;
+            while(p != null && p.info.onum != onum)
+            {
+                q = p;
+                p = p.link;
+            }
+            if(p == null)
+            {
+                Console.WriteLine($"Заказа с номером {onum} не существует");
+                return;
+            }
+            if(q == null)
+            {
+                first = p.link;
+            }
+            else
+            {
+                q.link = p.link;
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Console.WriteLine("База данных: Фотография\n");
+                Console.Write("Введите кол-во записей: ");
+                int n = Convert.ToInt32(Console.ReadLine());
+                SingleLinkedList sll = new SingleLinkedList();
+                string[] data = File.ReadAllLines(@"C:\Users\sa1ex\Desktop\123.txt");
+                for (int i = 0; i < n; i++)
+                {
+                    string[] separation = data[i].Split(',');
+                    int onum = Convert.ToInt32(separation[0]);
+                    DateTime odate = DateTime.Parse(separation[1]);
+                    string phsize = separation[2];
+                    string phname = separation[3];
+                    string cname = separation[4];
+                    double oprice = Convert.ToDouble(separation[5]);
+
+                    Photography ph = new Photography()
+                    {
+                        onum = onum,
+                        odate = odate,
+                        phsize = phsize,
+                        phname = phname,
+                        cname = cname,
+                        oprice = oprice
+                    };
+                    sll.add(ph);
+                }
+                int w = 0;
+                while (w != 6)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Просмотр данных о всех заказах - 1\nПоиск фотографии по номеру заказа - 2\nВставка фотографии до заданного узла - 3\nВставка фотографии после заданного узла - 4\nУдаление по номеру заказа - 5\nВыход - 6\n");
+                    Console.Write("Введите опцию: ");
+                    w = Convert.ToInt32(Console.ReadLine());
+                    switch (w)
+                    {
+                        case 1:
+                            Console.WriteLine("Список фотографий:");
+                            sll.view();
+                            Console.ReadKey();
+                            break;
+                        case 2:
+                            Console.Write("Введите номер заказа: ");
+                            int onum = Convert.ToInt32(Console.ReadLine());
+                            Node node = sll.search(onum);
+                            if (node != null)
+                            {
+                                Console.WriteLine(node.info.ToString());
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Заказа с номером {onum} не существует");
+                            }
+                            Console.ReadKey();
+                            break;
+                        case 3:
+                            Console.Write("Введите номер заказа, перед которым нужно вставить фотографию: ");
+                            onum = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Введите номер заказа новой фотографии: ");
+                            int new_onum = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Введите дату заказа новой фотографии: ");
+                            DateTime new_odate = DateTime.Parse(Console.ReadLine());
+                            Console.Write("Введите размер новой фотографии: ");
+                            string new_phsize = Console.ReadLine();
+                            Console.Write("Введите ФИО фотографа новой фотографии: ");
+                            string new_phname = Console.ReadLine();
+                            Console.Write("Введите ФИО заказчика новой фотографии: ");
+                            string new_cname = Console.ReadLine();
+                            Console.Write("Введите цену новой фотографии: ");
+                            double new_oprice = Convert.ToDouble(Console.ReadLine());
+
+                            Photography new_photo = new Photography
+                            {
+                                onum = new_onum,
+                                odate = new_odate,
+                                phsize = new_phsize,
+                                phname = new_phname,
+                                cname = new_cname,
+                                oprice = new_oprice
+                            };
+
+                            sll.addbefore(onum, new_photo);
+                            Console.ReadKey();
+                            break;
+                        case 4:
+                            Console.Write("Введите номер заказа, после которого нужно вставить фотографию: ");
+                            onum = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Введите номер заказа новой фотографии: ");
+                            new_onum = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Введите дату заказа новой фотографии: ");
+                            new_odate = DateTime.Parse(Console.ReadLine());
+                            Console.Write("Введите размер новой фотографии: ");
+                            new_phsize = Console.ReadLine();
+                            Console.Write("Введите ФИО фотографа новой фотографии: ");
+                            new_phname = Console.ReadLine();
+                            Console.Write("Введите ФИО заказчика новой фотографии: ");
+                            new_cname = Console.ReadLine();
+                            Console.Write("Введите цену новой фотографии: ");
+                            new_oprice = Convert.ToDouble(Console.ReadLine());
+
+                            new_photo = new Photography
+                            {
+                                onum = new_onum,
+                                odate = new_odate,
+                                phsize = new_phsize,
+                                phname = new_phname,
+                                cname = new_cname,
+                                oprice = new_oprice
+                            };
+
+                            sll.addafter(onum, new_photo);
+                            Console.ReadKey();
+                            break;
+                        case 5:
+                            Console.Write("Введите номер заказа удаляемой фотографии: ");
+                            onum = Convert.ToInt32(Console.ReadLine());
+                            sll.delete(onum);
+                            Console.ReadKey();
+                            break;
+                    }
+                    Console.Clear();
+                }
+                Console.ReadKey();
+            }
+            catch
+            {
+                Console.WriteLine("Error");
+            }
+        }
+            
+    }
+}

@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace pr17
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            Pen r = new Pen(Color.Red, 5);
+            Pen b = new Pen(Color.Black, 5);
+            Pen w = new Pen(Color.White, 1);
+            Pen b1 = new Pen(Color.Black, 1);
+
+            SolidBrush red = new SolidBrush(Color.Red);
+            SolidBrush black = new SolidBrush(Color.Black);
+            SolidBrush white = new SolidBrush(Color.White);
+
+            e.Graphics.DrawEllipse(b, 100, 80, 70, 70);
+            e.Graphics.FillEllipse(black, 100, 80, 70, 70); //head
+            e.Graphics.DrawEllipse(w, 105, 85, 60, 60);
+
+            e.Graphics.DrawEllipse(b, 100, 180, 70, 70);
+            e.Graphics.FillEllipse(black, 100, 180, 70, 70); //ass
+            e.Graphics.DrawEllipse(w, 105, 185, 60, 60);
+
+            e.Graphics.DrawEllipse(r, 50, 110, 95, 130);
+            e.Graphics.FillEllipse(red, 50, 110, 95, 130);
+            e.Graphics.DrawEllipse(w, 55, 115, 85, 120);
+            e.Graphics.DrawEllipse(b1, 67, 160, 30, 30);
+            e.Graphics.FillEllipse(black, 70, 163, 25, 25); // left wing
+            e.Graphics.DrawEllipse(b1, 95, 130, 15, 15);
+            e.Graphics.FillEllipse(black, 98, 132, 10, 10);
+            e.Graphics.DrawEllipse(b1, 95, 196, 15, 15);
+            e.Graphics.FillEllipse(black, 98, 198, 10, 10);
+
+            e.Graphics.DrawEllipse(r, 121, 110, 95, 130);
+            e.Graphics.FillEllipse(red, 121, 110, 95, 130);
+            e.Graphics.DrawEllipse(w, 126, 115, 85, 120);
+            e.Graphics.DrawEllipse(b1, 173, 160, 30, 30);
+            e.Graphics.FillEllipse(black, 175, 163, 25, 25); // right wing
+            e.Graphics.DrawEllipse(b1, 157, 130, 15, 15);
+            e.Graphics.FillEllipse(black, 160, 132, 10, 10);
+            e.Graphics.DrawEllipse(b1, 157, 196, 15, 15);
+            e.Graphics.FillEllipse(black, 160, 198, 10, 10);
+
+            e.Graphics.DrawLine(b, 110, 88, 90, 50);
+            e.Graphics.DrawEllipse(b1, 84, 45, 13, 13); // left usiko
+            e.Graphics.FillEllipse(red, 84, 45, 13, 13);
+
+            e.Graphics.DrawLine(b, 160, 88, 180, 50);
+            e.Graphics.DrawEllipse(b1, 173, 45, 13, 13); // right usiko
+            e.Graphics.FillEllipse(red, 173, 45, 13, 13);
+        }
+    }
+}

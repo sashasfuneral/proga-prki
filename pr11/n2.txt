@@ -1,0 +1,96 @@
+using System;
+using System.IO;
+
+namespace ConsoleApp74
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Заданы массивы X(N) и Y(K).Сформировать массив D, куда записать 3 наибольших элемента массива X и 4 наибольших элемента массива Y.\n");
+            string D = @"C:\Users\sa1ex\Desktop\D.txt";
+            Console.Write("Введите размерность массива X: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int[] x = new int[n];
+            Console.WriteLine("\nМассив X имеет следующий вид:");
+            for(int i = 0; i < x.Length; i++)
+            {
+                Console.Write($"({i}): ");
+                x[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            Console.Write("\nВведите размерность массива Y: ");
+            int k = Convert.ToInt32(Console.ReadLine());
+            int[] y = new int[k];
+            Console.WriteLine("\nМассив Y имеет следующий вид:");
+            for (int i = 0; i < y.Length; i++)
+            {
+                Console.Write($"({i}): ");
+                y[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            int X = int.MinValue; int XX = int.MinValue; int XXX = int.MinValue;
+            foreach(int i in x)
+            {
+                if(i > X)
+                {
+                    XXX = XX;
+                    XX = X;
+                    X = i;
+                }
+                else if(i > XX)
+                {
+                    XXX = XX;
+                    XX = i;
+                }
+                else if(i > XXX)
+                {
+                    XXX = i;
+                }
+            }
+            int Y = int.MinValue; int YY = int.MinValue; int YYY = int.MinValue; int YYYY = int.MinValue;
+            foreach (int i in y)
+            {
+                if (i > Y)
+                {
+                    YYYY = YYY;
+                    YYY = YY;
+                    YY = Y;
+                    Y = i;
+                }
+                else if (i > YY)
+                {
+                    YYYY = YYY;
+                    YYY = YY;
+                    YY = i;
+                }
+                else if (i > YYY)
+                {
+                    YYYY = YYY;
+                    YYY = i;
+                }
+                else if(i > YYYY)
+                {
+                    YYYY = i;
+                }
+            }
+            int[] xmax = { X, XX, XXX };
+            int[] ymax = { Y, YY, YYY, YYYY };
+            StreamWriter dd = new StreamWriter(D);
+            for(int i = 0; i < xmax.Length; i++)
+            {
+                dd.WriteLine(xmax[i]);
+            }
+            for(int i = 0; i < ymax.Length; i++)
+            {
+                dd.WriteLine(ymax[i]);
+            }
+            dd.Close();
+            string[] ddd = File.ReadAllLines(D);
+            Console.WriteLine("\nМассив D имеет следующий вид:");
+            for(int i = 0; i < ddd.Length; i++)
+            {
+                Console.WriteLine($"({i}): {ddd[i]}");
+            }
+            Console.Beep();
+        }
+    }
+}

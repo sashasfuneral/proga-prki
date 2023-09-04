@@ -1,0 +1,34 @@
+using System;
+using System.IO;
+
+namespace ConsoleApp73
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Дана подстрока из трех символов. Найти в тексте заданную подстроку и удалить ее из всех слов текста. Оставшийся текст «сжать». Определить количество удаленных символов.\n");
+            string filepath = @"C:\Users\sa1ex\Desktop\txt.txt";
+            string rat = File.ReadAllText(filepath);
+            Console.Write($"Текст имеет следующий вид: {rat}\n");
+            Console.Write("\nВведите подстроку из 3-х символов: ");
+            string sub = Console.ReadLine();
+            int c = 0;
+            string[] symbols = rat.Split(' ');
+            for(int i = 0; i < symbols.Length; i++)
+            {
+                string symbol = symbols[i];
+                if(symbol.Contains(sub))
+                {
+                    symbol = symbol.Replace(sub, "");
+                    c += sub.Length;
+                }
+                symbols[i] = symbol;
+            }
+            string text = string.Join(" ", symbols);
+            File.WriteAllText(filepath, text);
+            Console.WriteLine($"\nКоличество удалённых символов: {c}");
+            Console.Beep();
+        }
+    }
+}

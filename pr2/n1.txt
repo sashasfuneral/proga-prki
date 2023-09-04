@@ -1,0 +1,81 @@
+using System;
+
+namespace pr3n3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Вывести направление робота после полученной команды");
+            int n;
+            string c;
+            Console.WriteLine("Введите исходное направление робота: ");
+            c = Console.ReadLine();
+            Console.WriteLine("Введите команду для робота: ");
+            n = Convert.ToInt32(Console.ReadLine());
+            switch (c)
+            {
+                case "С":
+                    switch (n)
+                    {
+                        case 1:
+                            c = "З";
+                            break;
+                        case 0:
+                            c = "С";
+                            break;
+                        case -1:
+                            c = "В";
+                            break;
+                    }
+                    break;
+                case "Ю":
+                    switch (n)
+                    {
+                        case 1:
+                            c = "С";
+                            break;
+                        case 0:
+                            c = "Ю";
+                            break;
+                        case -1:
+                            c = "В";
+                            break;
+                    }
+                    break;
+                case "З":
+                    switch (n)
+                    {
+                        case 1:
+                            c = "В";
+                            break;
+                        case 0:
+                            c = "З";
+                            break;
+                        case -1:
+                            c = "С";
+                            break;
+                    }
+                    break;
+                case "В":
+                    switch (n)
+                    {
+                        case 1:
+                            c = "Ю";
+                            break;
+                        case 0:
+                            c = "В";
+                            break;
+                        case -1:
+                            c = "З";
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            Console.WriteLine("Робот смотрит в сторону :" + c);
+            Console.Beep();
+        }
+    }
+}

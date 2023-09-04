@@ -1,0 +1,41 @@
+using System;
+
+namespace ConsoleApp27
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Найти элемент массива, который наиболее близок к числу R.");
+            Console.WriteLine();
+            int r, n;
+            int[] a;
+            Console.Write("R: ");
+            r = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+            Console.Write("Количество элементов массива: ");
+            n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+            a = new int[n];
+            Console.WriteLine("Введите элементы массива: ");
+            for(int i = 0; i < n; i++)
+            {
+                Console.Write("(" + i + "): ");
+                a[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            Console.WriteLine();
+            int q = 1;
+            int m = Math.Abs(a[0] - r);
+            for(int i = 1; i < n; i++)
+            {
+                if(Math.Abs(a[i] - r) < m)
+                {
+                    m = Math.Abs(a[i] - r);
+                    q = i;
+                }
+            }
+            Console.WriteLine("Элемент массива, наиболее близкий к числу R: " + a[q]);
+            Console.Beep();
+        }
+    }
+}

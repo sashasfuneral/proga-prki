@@ -1,0 +1,91 @@
+using System;
+using System.IO;
+
+namespace ConsoleApp76
+{
+    internal class Program
+    {
+        struct Photography
+        {
+            public int onum;
+            public DateTime odate;
+            public string phsize;
+            public string phname;
+            public string cname;
+            public double oprice;
+        }
+        static void Main(string[] args)
+        {
+            try
+            {
+                Console.WriteLine("База данных: Фотография\n");
+                Console.Write("Введите кол-во записей: ");
+                int n = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+                Photography[] orders = new Photography[n];
+                string[] data = File.ReadAllLines(@"C:\Users\sa1ex\Desktop\data.txt");
+                for (int i = 0; i < n; i++)
+                {
+                    string[] q = data[i].Split(',');
+                    orders[i].onum = int.Parse(q[0]);
+                    orders[i].odate = DateTime.Parse(q[1]);
+                    orders[i].phsize = q[2];
+                    orders[i].phname = q[3];
+                    orders[i].cname = q[4];
+                    orders[i].oprice = double.Parse(q[5]);
+                }
+                int w = 0;
+                while (w < 3)
+                {
+                    Console.WriteLine("Просмотр данных - 1\n" + "Поиск данных - 2\n" + "Выход - 3\n");
+                    Console.Write("Введите опцию: ");
+                    w = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine();
+                    switch (w)
+                    {
+                        case 1:
+                            print(n, orders);
+                            Console.ReadKey();
+                            break;
+                        case 2:
+                            search(n, orders);
+                            Console.ReadKey();
+                            break;
+                    }
+                    Console.Clear();
+                }
+                Console.ReadKey();
+            }
+            catch
+            {
+                Console.WriteLine("Error");
+                return;
+            }
+        }
+        static void print(int n, Photography[] orders)
+        {
+            for(int i = 0; i < n; i++)
+            {
+                Console.Write($"Номер заказа: {orders[i].onum}" + $"| Дата приёма заказа: {orders[i].odate}" + $"| Размер фотографии: {orders[i].phsize}" + $"| ФИО фотографа: {orders[i].phname}" + $"| ФИО заказчика: {orders[i].cname}" + $"| Цена заказа: {orders[i].oprice} руб.\n");
+                Console.WriteLine();
+            }
+        }
+        static void search(int n, Photography[] orders)
+        {
+            Console.Write($"Введите номер заказа: ");
+            int q = Convert.ToInt32(Console.ReadLine());
+            for(int i = 0; i < n; i++)
+            {
+                try
+                {
+                    if (orders[i].onum == q)
+                    {
+                        Console.Write($"\nНомер заказа: {orders[i].onum}" + $"| Дата приёма заказа: {orders[i].odate}" + $"| Размер фотографии: {orders[i].phsize}" + $"| ФИО фотографа: {orders[i].phname}" + $"| ФИО заказчика: {orders[i].cname}" + $"| Цена заказа: {orders[i].oprice} руб.");
+                    }
+                }
+                catch
+                { }
+            }
+        }
+    }
+}

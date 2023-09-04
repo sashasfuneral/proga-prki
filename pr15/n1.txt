@@ -1,0 +1,212 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Calculator
+{
+    public partial class Calc : Form
+    {
+        public Calc()
+        {
+            InitializeComponent();
+        }
+
+        private enum ops { none, sum, sub, mult, div }
+        private double v = 0;
+        private ops op = ops.none;
+
+        private void summation()
+        {
+            double cv = double.Parse(textBox1.Text);
+            double result = v + cv;
+            textBox1.Text = result.ToString();
+        }
+
+        private void subtraction()
+        {
+            double cv = double.Parse(textBox1.Text);
+            double result = v - cv;
+            textBox1.Text = result.ToString();
+        }
+
+        private void multiplication()
+        {
+            double cv = double.Parse(textBox1.Text);
+            double result = v * cv;
+            textBox1.Text = result.ToString();
+        }
+        private void division()
+        {
+            double cv = double.Parse(textBox1.Text);
+            if (cv != 0)
+            {
+                double result = v / cv;
+                textBox1.Text = result.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void d1_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+
+        private void d2_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+
+        private void d3_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+
+        private void d4_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+
+        private void d5_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+
+        private void d6_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+
+        private void d7_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+
+        private void d8_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+
+        private void d9_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+        private void d0_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            textBox1.Text += button.Text;
+        }
+        private void dot_Click(object sender, EventArgs e)
+        {
+            if (!textBox1.Text.Contains("."))
+            {
+                textBox1.Text += ".";
+            }
+        }
+
+        private void sum_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                v = double.Parse(textBox1.Text);
+                textBox1.Text = string.Empty;
+                op = ops.sum;
+            }
+        }
+
+        private void sub_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                v = double.Parse(textBox1.Text);
+                textBox1.Text = string.Empty;
+                op = ops.sub;
+            }
+        }
+
+        private void mult_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                v = double.Parse(textBox1.Text);
+                textBox1.Text = string.Empty;
+                op = ops.mult;
+            }
+        }
+
+        private void div_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                v = double.Parse(textBox1.Text);
+                textBox1.Text = string.Empty;
+                op = ops.div;
+            }
+        }
+
+        private void eq_Click(object sender, EventArgs e)
+        {
+            if (op != ops.none && !string.IsNullOrEmpty(textBox1.Text))
+            {
+                switch (op)
+                {
+                    case ops.sum:
+                        summation();
+                        break;
+                    case ops.sub:
+                        subtraction();
+                        break;
+                    case ops.mult:
+                        multiplication();
+                        break;
+                    case ops.div:
+                        division();
+                        break;
+                }
+                op = ops.none;
+            }
+        }
+
+        private void pm_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                double value = double.Parse(textBox1.Text);
+                value = -value;
+                textBox1.Text = value.ToString();
+            }
+        }
+
+        private void bs_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                textBox1.Text = textBox1.Text.Substring(0, textBox1.Text.Length - 1);
+            }
+        }
+
+        private void c_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = string.Empty;
+            v = 0;
+            op = ops.none;
+        }
+    }
+}

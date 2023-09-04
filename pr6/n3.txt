@@ -1,0 +1,43 @@
+using System;
+
+namespace ConsoleApp28
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Сформировать новый массив B того же размера по следующему правилу: элемент B от к равен среднему арифметическому элементов массива A с номерами от 1 до K.");
+            Console.WriteLine();
+            int n;
+            int[] a;
+            int[] b = new int[10];
+            Console.Write("Количество элементов массива A: ");
+            n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+            a = new int[n];
+            Console.WriteLine("Введите элементы массива A: ");
+            for(int k = 0; k < n; k++)
+            {
+                Console.Write("(" + k + "): ");
+                a[k] = Convert.ToInt32(Console.ReadLine());
+            }
+            Console.WriteLine();
+            int q;
+            for (int k = 0; k < n; k++)
+            {
+                b[k] = 0;
+                for(q = 0; q <= k; q++)
+                {
+                    b[k] += a[q];
+                }
+                b[k] /= k + 1;
+            }
+            Console.WriteLine("Массив B имеет следующий вид: ");
+            for(int k = 0; k < n; k++)
+            {
+                Console.WriteLine("(" + k + "): " + b[k]);
+            }
+            Console.Beep();
+        }
+    }
+}

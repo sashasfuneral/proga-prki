@@ -1,0 +1,36 @@
+using System;
+using System.Numerics;
+
+namespace ConsoleApp55
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("С клавиатуры вводятся положительные числа N1 и N2 и строки S1 и S2. Получить из этих строк новую строку, содержащую первые N1 символов строки S1 и последние N2 символов строки S2 (в указанном порядке).");
+            Console.WriteLine();
+            Console.Write("N1: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+            Console.Write("N2: ");
+            int nn = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+            Console.Write("S1: ");
+            string s = Console.ReadLine();
+            Console.WriteLine();
+            Console.Write("S2: ");
+            string ss = Console.ReadLine();
+            Console.WriteLine();
+            Console.Write("New string: ");
+            for(int i = 0; i < n; i++)
+            {
+                Console.Write(s[i]);
+            }
+            for (int j = ss.Length - nn; j < ss.Length; j++)
+            {
+                Console.Write(ss[j]);
+            }
+            Console.Beep();
+        }
+    }
+}

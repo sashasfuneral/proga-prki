@@ -1,0 +1,24 @@
+using System;
+
+namespace pr2n2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Какие суммы насчитает компьютер к оплате за каждый разговор в отдельности и вместе?");
+            int c1, c2, c3, t1, t2, t3;
+            c1 = Convert.ToInt32(Console.ReadLine());
+            c2 = Convert.ToInt32(Console.ReadLine());
+            c3 = Convert.ToInt32(Console.ReadLine());
+            t1 = Convert.ToInt32(Console.ReadLine());
+            t2 = Convert.ToInt32(Console.ReadLine());
+            t3 = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Стоимость за первый разговор: " + (c1 * t1));
+            Console.WriteLine("Стоимость за первый разговор: " + (c2 * t2));
+            Console.WriteLine("Стоимость за первый разговор: " + (c3 * t3));
+            Console.WriteLine("Общая стоимость: " + (c1 * t1 + c2 * t2 + c3 * t3));
+            Console.Beep();
+        }
+    }
+}

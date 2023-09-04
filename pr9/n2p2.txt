@@ -1,0 +1,33 @@
+using System;
+using System.Net.Http.Headers;
+using System.Text;
+
+namespace ConsoleApp57
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("С клавиатуры вводятся строки S, S1. Удалить из строки S первую подстроку, совпадающую с S1. Если совпадающих подстрок нет, то вывести строку S без изменений.");
+            Console.WriteLine();
+            Console.Write("S: ");
+            string s = Console.ReadLine();
+            Console.WriteLine();
+            Console.Write("S1: ");
+            string ss = Console.ReadLine();
+            Console.WriteLine();
+            for(int i = 0; i < s.Length; i++)
+            {
+                for(int j = 0; j < ss.Length; j++)
+                {
+                    if (s[i] == ss[j])
+                    {
+                        s = s.Remove(i, ss.Length);
+                    }
+                }
+            }
+            Console.WriteLine(s);
+            Console.Beep();
+        }
+    }
+}

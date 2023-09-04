@@ -1,0 +1,32 @@
+using System;
+
+namespace ConsoleApp62
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Получить новую строку, взяв из данной все символы, находящиеся между первой открывающейся скобкой и последней закрывающейся (если какие-либо скобки отсутствует, то вывести соответствующее сообщение).");
+            Console.WriteLine();
+            Console.Write("Введите строку: ");
+            string s = Console.ReadLine();
+            Console.WriteLine();
+            string Result;
+            if(s.Contains('(') && s.Contains(')'))
+            {
+                Result = BetweenBrackets(s);
+                Console.WriteLine($"Новая строка: {Result}");
+            }
+            else
+            {
+                Console.WriteLine("Скобки отсутствуют");
+            }
+            Console.Beep();
+            static string BetweenBrackets(string s)
+            {
+                string BetweenBrackets = s.Substring(s.IndexOf('(') + 1, s.IndexOf(')') - 1);
+                return BetweenBrackets;
+            }
+        }
+    }
+}

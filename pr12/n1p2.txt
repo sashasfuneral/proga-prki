@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleApp75
+{
+    class Matrix
+    {
+        public int n;
+        public int[,] size;
+
+        public Matrix(int n)
+        {
+            this.n = n;
+            size = new int[this.n, this.n];
+        }
+
+        public void input()
+        {
+            Console.WriteLine("Ввод элементов матрицы:\n");
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"Строка {i}:");
+                for (int j = 0; j < n; j++)
+                {
+                    Console.Write($"({j}): ");
+                    size[i, j] = Convert.ToInt32(Console.ReadLine());
+                }
+                Console.WriteLine();
+            }
+        }
+        public void output()
+        {
+            Console.WriteLine("Матрица имеет следующий вид: ");
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    Console.Write(size[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+        public void swap()
+        {
+            int lmaxi = 0;
+            int lmaxj = n - 2;
+            for(int i = 1; i < n; i++)
+            {
+                for(int j = 0; j < n - 1 - i; j++)
+                {
+                    if(size[i, j] > size[lmaxi, lmaxj])
+                    {
+                        lmaxi = i;
+                        lmaxj = j;
+                    }
+                }
+            }
+            Console.WriteLine($"\nМаксимальный элемент, лежащий левее вспомогательной диагонали: {size[lmaxi, lmaxj]}");
+
+            int rmaxi = 0;
+            int rmaxj = n - 1;
+            for (int i = 0; i < n; i++)
+            {
+                for(int j = n - i; j < n; j++)
+                {
+                    if (size[i, j] > size[rmaxi, rmaxj])
+                    {
+                        rmaxi = i;
+                        rmaxj = j;
+                    }
+                }
+            }
+            Console.WriteLine($"\nМаксимальный элемент, лежащий правее вспомогательной диагонали: {size[rmaxi, rmaxj]}");
+
+            int swap = size[lmaxi, lmaxj];
+            size[lmaxi, lmaxj] = size[rmaxi, rmaxj];
+            size[rmaxi, rmaxj] = swap;
+
+            Console.WriteLine("\nИзменённый вид матрицы:");
+            for(int i = 0; i < n; i++)
+            {
+                for(int j = 0; j < n; j++)
+                {
+                    Console.Write(size[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}

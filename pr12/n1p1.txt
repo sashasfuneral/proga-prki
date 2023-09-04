@@ -1,0 +1,16 @@
+using System;
+
+namespace ConsoleApp75
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Matrix m = new Matrix(5);
+            m.input();
+            m.output();
+            m.swap();
+            Console.ReadKey();
+        }
+    }
+}
